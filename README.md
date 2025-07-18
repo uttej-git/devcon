@@ -14,21 +14,20 @@ DevConnect is a simple React-based practice project that demonstrates basic rout
 ## 📁 Project Structure
 
 devconnect/
-├── src/
-│ ├── components/
-│ │ ├── Navbar.jsx
-│ │ └── PostCard.jsx
-│ ├── pages/
-│ │ ├── Home.jsx
-│ │ ├── Feed.jsx
-│ │ ├── Login.jsx
-│ │ └── Profile.jsx
-│ └── App.js
 ├── public/
-│ └── index.html
+│   └── index.html
+├── src/
+│   ├── components/
+│   │   ├── Navbar.jsx
+│   │   └── PostCard.jsx
+│   ├── pages/
+│   │   ├── Home.jsx
+│   │   ├── Feed.jsx
+│   │   ├── Login.jsx
+│   │   └── Profile.jsx
+│   └── App.js
 ├── package.json
 └── README.md
-
 
 
 ## ⚙️ Prerequisites
