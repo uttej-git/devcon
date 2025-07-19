@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Postcard = ({ username, content }) => {
+const Postcard = ({ username, content, time }) => {
   return (
     <div style={{
       backgroundColor: 'white',
@@ -11,6 +11,9 @@ const Postcard = ({ username, content }) => {
     }}>
       <h3 style={{ fontWeight: 'bold' }}>{username}</h3>
       <p>{content}</p>
+      <small style={{ color: 'gray' }}>
+        {time ? time : 'No time available'}
+      </small>
     </div>
   );
 };
