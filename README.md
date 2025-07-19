@@ -8,7 +8,6 @@ DevConnect is a simple React-based practice project that demonstrates basic rout
 - 📝 Post your thoughts (with name & content)
 - 🕒 **Timestamps**: Every post now includes the exact time it was made
 - 💾 LocalStorage support (posts persist across reloads)
-- 📜 Dummy starter posts on first load
 - ⚡️ Instant updates with useState and useEffect
 
 ## 📁 Project Structure
