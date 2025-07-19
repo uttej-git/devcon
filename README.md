@@ -5,11 +5,11 @@ DevConnect is a simple React-based practice project that demonstrates basic rout
 
 ## 🛠️ Features
 
-- React app setup with functional components
-- Navigation using react-router-dom
-- Dummy pages for Home, Feed, Profile, and Login
-- Styled navbar with links
-- Feed page renders dummy posts with reusable PostCard component
+- 📝 Post your thoughts (with name & content)
+- 🕒 **Timestamps**: Every post now includes the exact time it was made
+- 💾 LocalStorage support (posts persist across reloads)
+- 📜 Dummy starter posts on first load
+- ⚡️ Instant updates with useState and useEffect
 
 ## 📁 Project Structure
 
@@ -42,6 +42,13 @@ devconnect/
 npm install
 npm start
  Runs the app in development mode. Open http://localhost:3000 to view it in the browser.
+
+## 🧠 Upcoming Features
+
+- ✏️ Edit your posts
+- ❌ Delete posts
+- 🔍 Filter or search posts
+- 🌙 Dark mode
 
 
 👤 Author
