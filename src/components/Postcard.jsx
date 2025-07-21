@@ -47,7 +47,7 @@ const Postcard = ({
           <button onClick={() => onEdit(id, content)} style={{ marginRight: '0.5rem' }}>
             Edit
           </button>
-          
+          <button onClick={() => onDelete(id)} style={{ color: 'red' }}>
             Delete
           </button>
         </div>
