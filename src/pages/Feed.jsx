@@ -4,23 +4,21 @@ import Postcard from '../components/Postcard';
 const Feed = () => {
   const [posts, setPosts] = useState(() => {
     const savedPosts = localStorage.getItem('devconnect-posts');
+    if (savedPosts) return JSON.parse(savedPosts);
 
-    if (savedPosts) {
-      return JSON.parse(savedPosts);
-    } else {
-      // Generate timestamp for each dummy post
-      const now = () =>
-        new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+    const now = () =>
+      new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
 
-      return [
-        { id: 1, username: 'Uttej', content: 'Hello world!', time: now() },
-        { id: 2, username: 'John Doe', content: 'Working on a cool project!', time: now() },
-        { id: 3, username: 'Jane Smith', content: 'Any suggestions for beginner devs?', time: now() }
-      ];
-    }
+    return [
+      { id: 1, username: 'Uttej', content: 'Hello world!', time: now() },
+      { id: 2, username: 'John Doe', content: 'Working on a cool project!', time: now() },
+      { id: 3, username: 'Jane Smith', content: 'Any suggestions for beginner devs?', time: now() }
+    ];
   });
 
   const [newPost, setNewPost] = useState({ username: '', content: '' });
+  const [editingPostId, setEditingPostId] = useState(null);
+  const [editedContent, setEditedContent] = useState('');
 
   useEffect(() => {
     localStorage.setItem('devconnect-posts', JSON.stringify(posts));
@@ -39,7 +37,7 @@ const Feed = () => {
     });
 
     const newEntry = {
-      id: posts.length + 1,
+      id: Date.now(), // unique ID
       username: newPost.username,
       content: newPost.content,
       time: timestamp,
@@ -47,6 +45,25 @@ const Feed = () => {
 
     setPosts([newEntry, ...posts]);
     setNewPost({ username: '', content: '' });
+  };
+
+  const handleDelete = (id) => {
+    const updatedPosts = posts.filter((post) => post.id !== id);
+    setPosts(updatedPosts);
+  };
+
+  const handleEdit = (id, currentContent) => {
+    setEditingPostId(id);
+    setEditedContent(currentContent);
+  };
+
+  const handleSave = (id) => {
+    const updatedPosts = posts.map((post) =>
+      post.id === id ? { ...post, content: editedContent } : post
+    );
+    setPosts(updatedPosts);
+    setEditingPostId(null);
+    setEditedContent('');
   };
 
   return (
@@ -78,9 +95,16 @@ const Feed = () => {
       {posts.map((post) => (
         <Postcard
           key={post.id}
+          id={post.id}
           username={post.username}
           content={post.content}
           time={post.time}
+          onDelete={handleDelete}
+          onEdit={handleEdit}
+          onSave={handleSave}
+          isEditing={editingPostId === post.id}
+          editedContent={editedContent}
+          setEditedContent={setEditedContent}
         />
       ))}
     </div>
