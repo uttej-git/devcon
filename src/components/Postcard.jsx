@@ -4,22 +4,25 @@ const Postcard = ({
   id,
   username,
   content,
-  time,
+  createdTime,
+  modifiedTime,
   onDelete,
   onEdit,
   onSave,
   isEditing,
   editedContent,
-  setEditedContent
+  setEditedContent,
 }) => {
   return (
-    <div style={{
-      backgroundColor: 'white',
-      padding: '1rem',
-      marginBottom: '1rem',
-      borderRadius: '8px',
-      boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-    }}>
+    <div
+      style={{
+        backgroundColor: 'white',
+        padding: '1rem',
+        marginBottom: '1rem',
+        borderRadius: '8px',
+        boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+      }}
+    >
       <h3 style={{ fontWeight: 'bold' }}>{username}</h3>
 
       {isEditing ? (
@@ -38,13 +41,21 @@ const Postcard = ({
         <p>{content}</p>
       )}
 
-      <small style={{ color: 'gray' }}>
-        {time ? time : 'No time available'}
+      <small style={{ color: 'gray', display: 'block' }}>
+        Created: {createdTime || 'N/A'}
+      </small>
+      <small style={{ color: 'gray', display: 'block' }}>
+        {modifiedTime && modifiedTime !== createdTime
+          ? `Edited: ${modifiedTime}`
+          : ''}
       </small>
 
       {!isEditing && (
         <div style={{ marginTop: '0.5rem' }}>
-          <button onClick={() => onEdit(id, content)} style={{ marginRight: '0.5rem' }}>
+          <button
+            onClick={() => onEdit(id, content)}
+            style={{ marginRight: '0.5rem' }}
+          >
             Edit
           </button>
           <button onClick={() => onDelete(id)} style={{ color: 'red' }}>
