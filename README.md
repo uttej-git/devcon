@@ -5,11 +5,11 @@ DevConnect is a simple React-based practice project that demonstrates basic rout
 
 ## 🛠️ Features
 
-- 📝 Post your thoughts (with name & content)
-- 🕒 **Timestamps**: Every post now includes the exact time it was made
-- 💾 LocalStorage support (posts persist across reloads)
-- ⚡️ Instant updates with useState and useEffect
-
+- ✅ Post submission with username & message
+- 🕒 Displays post creation time
+- ✏️ Edit existing posts with content update and **modified timestamp**
+- ❌ Delete any post
+- 🔁 Posts persist across page reloads using browser **localStorage**
 ## 📁 Project Structure
 
 ```
