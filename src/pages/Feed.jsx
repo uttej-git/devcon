@@ -10,9 +10,27 @@ const Feed = () => {
       new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
 
     return [
-      { id: 1, username: 'Uttej', content: 'Hello world!', time: now() },
-      { id: 2, username: 'John Doe', content: 'Working on a cool project!', time: now() },
-      { id: 3, username: 'Jane Smith', content: 'Any suggestions for beginner devs?', time: now() }
+      {
+        id: 1,
+        username: 'Uttej',
+        content: 'Hello world!',
+        createdTime: now(),
+        modifiedTime: now(),
+      },
+      {
+        id: 2,
+        username: 'John Doe',
+        content: 'Working on a cool project!',
+        createdTime: now(),
+        modifiedTime: now(),
+      },
+      {
+        id: 3,
+        username: 'Jane Smith',
+        content: 'Any suggestions for beginner devs?',
+        createdTime: now(),
+        modifiedTime: now(),
+      },
     ];
   });
 
@@ -37,10 +55,11 @@ const Feed = () => {
     });
 
     const newEntry = {
-      id: Date.now(), // unique ID
+      id: Date.now(),
       username: newPost.username,
       content: newPost.content,
-      time: timestamp,
+      createdTime: timestamp,
+      modifiedTime: timestamp,
     };
 
     setPosts([newEntry, ...posts]);
@@ -58,8 +77,14 @@ const Feed = () => {
   };
 
   const handleSave = (id) => {
+    const timestamp = new Date().toLocaleString('en-IN', {
+      timeZone: 'Asia/Kolkata',
+    });
+
     const updatedPosts = posts.map((post) =>
-      post.id === id ? { ...post, content: editedContent } : post
+      post.id === id
+        ? { ...post, content: editedContent, modifiedTime: timestamp }
+        : post
     );
     setPosts(updatedPosts);
     setEditingPostId(null);
@@ -98,7 +123,8 @@ const Feed = () => {
           id={post.id}
           username={post.username}
           content={post.content}
-          time={post.time}
+          createdTime={post.createdTime}
+          modifiedTime={post.modifiedTime}
           onDelete={handleDelete}
           onEdit={handleEdit}
           onSave={handleSave}
