@@ -4,18 +4,27 @@ import Postcard from '../components/Postcard';
 const Feed = () => {
   const [posts, setPosts] = useState(() => {
     const savedPosts = localStorage.getItem('devconnect-posts');
-    if (savedPosts) return JSON.parse(savedPosts);
+    let loadedPosts = [];
+
+    if (savedPosts) {
+      try {
+        loadedPosts = JSON.parse(savedPosts);
+      } catch (e) {
+        console.error('Error parsing saved posts:', e);
+      }
+    }
 
     const now = () =>
       new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
 
-    return [
+    const defaultPosts = [
       {
         id: 1,
         username: 'Uttej',
         content: 'Hello world!',
         createdTime: now(),
         modifiedTime: now(),
+        likes: 0,
       },
       {
         id: 2,
@@ -23,6 +32,7 @@ const Feed = () => {
         content: 'Working on a cool project!',
         createdTime: now(),
         modifiedTime: now(),
+        likes: 0,
       },
       {
         id: 3,
@@ -30,8 +40,21 @@ const Feed = () => {
         content: 'Any suggestions for beginner devs?',
         createdTime: now(),
         modifiedTime: now(),
+        likes: 0,
       },
     ];
+
+    const data = loadedPosts.length > 0 ? loadedPosts : defaultPosts;
+
+    return data.map((post) => ({
+      ...post,
+      likes: post.likes !== undefined ? post.likes : 0,
+    }));
+  });
+
+  const [likedPosts, setLikedPosts] = useState(() => {
+    const saved = localStorage.getItem('devconnect-likedPosts');
+    return saved ? JSON.parse(saved) : [];
   });
 
   const [newPost, setNewPost] = useState({ username: '', content: '' });
@@ -41,6 +64,10 @@ const Feed = () => {
   useEffect(() => {
     localStorage.setItem('devconnect-posts', JSON.stringify(posts));
   }, [posts]);
+
+  useEffect(() => {
+    localStorage.setItem('devconnect-likedPosts', JSON.stringify(likedPosts));
+  }, [likedPosts]);
 
   const handleChange = (e) => {
     setNewPost({ ...newPost, [e.target.name]: e.target.value });
@@ -60,6 +87,7 @@ const Feed = () => {
       content: newPost.content,
       createdTime: timestamp,
       modifiedTime: timestamp,
+      likes: 0,
     };
 
     setPosts([newEntry, ...posts]);
@@ -69,6 +97,7 @@ const Feed = () => {
   const handleDelete = (id) => {
     const updatedPosts = posts.filter((post) => post.id !== id);
     setPosts(updatedPosts);
+    setLikedPosts(likedPosts.filter((postId) => postId !== id));
   };
 
   const handleEdit = (id, currentContent) => {
@@ -89,6 +118,23 @@ const Feed = () => {
     setPosts(updatedPosts);
     setEditingPostId(null);
     setEditedContent('');
+  };
+
+  const handleLikeToggle = (id) => {
+    const isAlreadyLiked = likedPosts.includes(id);
+
+    const updatedPosts = posts.map((post) =>
+      post.id === id
+        ? { ...post, likes: post.likes + (isAlreadyLiked ? -1 : 1) }
+        : post
+    );
+    setPosts(updatedPosts);
+
+    if (isAlreadyLiked) {
+      setLikedPosts(likedPosts.filter((postId) => postId !== id));
+    } else {
+      setLikedPosts([...likedPosts, id]);
+    }
   };
 
   return (
@@ -125,12 +171,15 @@ const Feed = () => {
           content={post.content}
           createdTime={post.createdTime}
           modifiedTime={post.modifiedTime}
+          likes={post.likes}
+          isLiked={likedPosts.includes(post.id)}
           onDelete={handleDelete}
           onEdit={handleEdit}
           onSave={handleSave}
           isEditing={editingPostId === post.id}
           editedContent={editedContent}
           setEditedContent={setEditedContent}
+          onLike={handleLikeToggle}
         />
       ))}
     </div>
