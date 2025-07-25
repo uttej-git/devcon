@@ -7,12 +7,15 @@ const Postcard = ({
   content,
   createdTime,
   modifiedTime,
+  likes,
+  isLiked,
   onDelete,
   onEdit,
   onSave,
   isEditing,
   editedContent,
   setEditedContent,
+  onLike,
 }) => {
   const { darkMode } = useContext(ThemeContext);
 
@@ -59,6 +62,12 @@ const Postcard = ({
     color: '#fff',
   };
 
+  const likeButtonStyle = {
+    ...buttonStyle,
+    backgroundColor: isLiked ? '#0d6efd' : buttonStyle.backgroundColor,
+    color: isLiked ? '#fff' : buttonStyle.color,
+  };
+
   return (
     <div style={cardStyle}>
       <h3 style={{ fontWeight: 'bold' }}>{username}</h3>
@@ -79,21 +88,17 @@ const Postcard = ({
         <p>{content}</p>
       )}
 
-      <small style={smallTextStyle}>
-        Created: {createdTime || 'N/A'}
-      </small>
-      <small style={smallTextStyle}>
-        {modifiedTime && modifiedTime !== createdTime
-          ? `Edited: ${modifiedTime}`
-          : ''}
-      </small>
+      <small style={smallTextStyle}>Created: {createdTime || 'N/A'}</small>
+      {modifiedTime && modifiedTime !== createdTime && (
+        <small style={smallTextStyle}>Edited: {modifiedTime}</small>
+      )}
 
       {!isEditing && (
         <div style={{ marginTop: '0.5rem' }}>
-          <button
-            onClick={() => onEdit(id, content)}
-            style={buttonStyle}
-          >
+          <button onClick={() => onLike(id)} style={likeButtonStyle}>
+            {isLiked ? '❤️ Liked' : '🤍 Like'} ({likes})
+          </button>
+          <button onClick={() => onEdit(id, content)} style={buttonStyle}>
             Edit
           </button>
           <button onClick={() => onDelete(id)} style={deleteButtonStyle}>
