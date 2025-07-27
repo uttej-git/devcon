@@ -43,7 +43,6 @@ devconnect/
 ## 🚀 Installation & Run
 
 
-woduoidhiud
 
 ```bash
 npm install
