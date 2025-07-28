@@ -94,11 +94,15 @@ const Feed = () => {
     setNewPost({ username: '', content: '' });
   };
 
-  const handleDelete = (id) => {
-    const updatedPosts = posts.filter((post) => post.id !== id);
-    setPosts(updatedPosts);
-    setLikedPosts(likedPosts.filter((postId) => postId !== id));
-  };
+ const handleDelete = (id) => {
+  const confirmDelete = window.confirm("Are you sure you want to delete this post?");
+  if (!confirmDelete) return;
+
+  const updatedPosts = posts.filter((post) => post.id !== id);
+  setPosts(updatedPosts);
+  setLikedPosts(likedPosts.filter((postId) => postId !== id));
+};
+
 
   const handleEdit = (id, currentContent) => {
     setEditingPostId(id);
