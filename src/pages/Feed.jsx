@@ -60,6 +60,7 @@ const Feed = () => {
   const [newPost, setNewPost] = useState({ username: '', content: '' });
   const [editingPostId, setEditingPostId] = useState(null);
   const [editedContent, setEditedContent] = useState('');
+  const [searchTerm, setSearchTerm] = useState(''); // ✅ Added search state
 
   useEffect(() => {
     localStorage.setItem('devconnect-posts', JSON.stringify(posts));
@@ -94,15 +95,14 @@ const Feed = () => {
     setNewPost({ username: '', content: '' });
   };
 
- const handleDelete = (id) => {
-  const confirmDelete = window.confirm("Are you sure you want to delete this post?");
-  if (!confirmDelete) return;
+  const handleDelete = (id) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this post?");
+    if (!confirmDelete) return;
 
-  const updatedPosts = posts.filter((post) => post.id !== id);
-  setPosts(updatedPosts);
-  setLikedPosts(likedPosts.filter((postId) => postId !== id));
-};
-
+    const updatedPosts = posts.filter((post) => post.id !== id);
+    setPosts(updatedPosts);
+    setLikedPosts(likedPosts.filter((postId) => postId !== id));
+  };
 
   const handleEdit = (id, currentContent) => {
     setEditingPostId(id);
@@ -141,10 +141,33 @@ const Feed = () => {
     }
   };
 
+  // ✅ Filter posts based on search term
+  const filteredPosts = posts.filter(
+    (post) =>
+      post.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.content.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div style={{ padding: '1rem', maxWidth: '600px', margin: '0 auto' }}>
       <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Developer Feed</h2>
 
+      {/* ✅ Search bar */}
+      <input
+        type="text"
+        placeholder="🔍 Search by name or content"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        style={{
+          padding: '0.5rem',
+          marginBottom: '1rem',
+          width: '100%',
+          border: '1px solid #ccc',
+          borderRadius: '4px',
+        }}
+      />
+
+      {/* Post creation form */}
       <form onSubmit={handleSubmit} style={{ marginBottom: '2rem' }}>
         <input
           type="text"
@@ -167,25 +190,30 @@ const Feed = () => {
         </button>
       </form>
 
-      {posts.map((post) => (
-        <Postcard
-          key={post.id}
-          id={post.id}
-          username={post.username}
-          content={post.content}
-          createdTime={post.createdTime}
-          modifiedTime={post.modifiedTime}
-          likes={post.likes}
-          isLiked={likedPosts.includes(post.id)}
-          onDelete={handleDelete}
-          onEdit={handleEdit}
-          onSave={handleSave}
-          isEditing={editingPostId === post.id}
-          editedContent={editedContent}
-          setEditedContent={setEditedContent}
-          onLike={handleLikeToggle}
-        />
-      ))}
+      {/* Post list */}
+      {filteredPosts.length > 0 ? (
+        filteredPosts.map((post) => (
+          <Postcard
+            key={post.id}
+            id={post.id}
+            username={post.username}
+            content={post.content}
+            createdTime={post.createdTime}
+            modifiedTime={post.modifiedTime}
+            likes={post.likes}
+            isLiked={likedPosts.includes(post.id)}
+            onDelete={handleDelete}
+            onEdit={handleEdit}
+            onSave={handleSave}
+            isEditing={editingPostId === post.id}
+            editedContent={editedContent}
+            setEditedContent={setEditedContent}
+            onLike={handleLikeToggle}
+          />
+        ))
+      ) : (
+        <p>No posts found.</p>
+      )}
     </div>
   );
 };
