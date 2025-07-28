@@ -8,10 +8,11 @@ DevConnect is a simple React-based practice project that demonstrates basic rout
 - 🕒 **Timestamps**: Shows when the post was created
 - ✏️ **Edit support**: Modify posts with real-time updates and updated timestamp
 - ❌ **Delete support**: Remove unwanted posts instantly
-- 🤍❤️ **Like/Unlike Toggle**: Users can like or unlike posts; like count is stored
+- 🤍 **Like/Unlike Toggle**: Users can like or unlike posts; like count is stored
 - 💾 **LocalStorage**: All post data (content, likes, timestamps) is saved across reloads
 - 🌗 **Dark Mode Support**: Themed UI for better night reading
 - ⚡ **Instant UI updates** via `useState` and `useEffect`
+- 🔍 **Search Posts**: Filter visible posts by username or content
   
 
 '''
@@ -51,13 +52,12 @@ npm start
 Runs the app in development mode. Open http://localhost:3000 to view it in the browser.
 
 🧠 Upcoming Features
-    🔍 Filter or search posts
-
+    
     🔒 Auth-based post visibility
 
     🧑 Profile page completion
 
-    📱 Responsive mobile layout
+    📱 Responsive mobile layout and More
 
 👤 Author
 @uttej-git
