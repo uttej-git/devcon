@@ -26,25 +26,32 @@ const Navbar = () => {
         color: darkMode ? 'white' : 'black',
       }}
     >
-      <div style={{ display: 'flex', gap: '0.75rem' }}>
+      {/* Left spacer (empty) */}
+      <div style={{ flex: 1 }}></div>
+
+      {/* Centered nav links */}
+      <div style={{ flex: 2, display: 'flex', justifyContent: 'center', gap: '0.75rem' }}>
         <Link to="/" style={linkStyle}>Home</Link>
         <Link to="/feed" style={linkStyle}>Feed</Link>
         <Link to="/profile" style={linkStyle}>Profile</Link>
         <Link to="/login" style={linkStyle}>Login</Link>
       </div>
 
-      <button
-        onClick={() => setDarkMode(!darkMode)}
-        style={{
-          ...linkStyle,
-          cursor: 'pointer',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.3rem',
-        }}
-      >
-        {darkMode ? '☀️ Light' : '🌙 Dark'}
-      </button>
+      {/* Right-side toggle */}
+      <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
+        <button
+          onClick={() => setDarkMode(!darkMode)}
+          style={{
+            ...linkStyle,
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.3rem',
+          }}
+        >
+          {darkMode ? '☀️ Light' : '🌙 Dark'}
+        </button>
+      </div>
     </nav>
   );
 };
