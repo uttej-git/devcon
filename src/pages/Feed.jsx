@@ -60,7 +60,7 @@ const Feed = () => {
   const [newPost, setNewPost] = useState({ username: '', content: '' });
   const [editingPostId, setEditingPostId] = useState(null);
   const [editedContent, setEditedContent] = useState('');
-  const [searchTerm, setSearchTerm] = useState(''); // ✅ Added search state
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     localStorage.setItem('devconnect-posts', JSON.stringify(posts));
@@ -141,7 +141,6 @@ const Feed = () => {
     }
   };
 
-  // ✅ Filter posts based on search term
   const filteredPosts = posts.filter(
     (post) =>
       post.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -149,71 +148,106 @@ const Feed = () => {
   );
 
   return (
-    <div style={{ padding: '1rem', maxWidth: '600px', margin: '0 auto' }}>
-      <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Developer Feed</h2>
+    <div style={{ display: 'flex', height: 'calc(100vh - 64px)' }}>
+      
+      {/* Left panel (static) */}
+      <div style={{
+        width: '20%',
+        backgroundColor: '#1f1f1f',
+        color: 'white',
+        padding: '1rem',
+        display: 'none', // optional: hide on small screens
+        flexShrink: 0,
+      }}>
+        <h3>🔔 Notifications</h3>
+        <p>Coming soon...</p>
+      </div>
 
-      {/* ✅ Search bar */}
-      <input
-        type="text"
-        placeholder="🔍 Search by name or content"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+      {/* Center scrollable feed */}
+      <div
         style={{
-          padding: '0.5rem',
-          marginBottom: '1rem',
-          width: '100%',
-          border: '1px solid #ccc',
-          borderRadius: '4px',
+          flex: 1,
+          overflowY: 'auto',
+          padding: '1rem',
+          maxWidth: '600px',
+          margin: '0 auto',
         }}
-      />
+      >
+        <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Developer Feed</h2>
 
-      {/* Post creation form */}
-      <form onSubmit={handleSubmit} style={{ marginBottom: '2rem' }}>
         <input
           type="text"
-          name="username"
-          placeholder="Your name"
-          value={newPost.username}
-          onChange={handleChange}
-          style={{ padding: '0.5rem', marginBottom: '0.5rem', width: '100%' }}
+          placeholder="🔍 Search by name or content"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          style={{
+            padding: '0.5rem',
+            marginBottom: '1rem',
+            width: '100%',
+            border: '1px solid #ccc',
+            borderRadius: '4px',
+          }}
         />
-        <textarea
-          name="content"
-          placeholder="What's on your mind?"
-          value={newPost.content}
-          onChange={handleChange}
-          rows="3"
-          style={{ padding: '0.5rem', marginBottom: '0.5rem', width: '100%' }}
-        />
-        <button type="submit" style={{ padding: '0.5rem 1rem' }}>
-          Post
-        </button>
-      </form>
 
-      {/* Post list */}
-      {filteredPosts.length > 0 ? (
-        filteredPosts.map((post) => (
-          <Postcard
-            key={post.id}
-            id={post.id}
-            username={post.username}
-            content={post.content}
-            createdTime={post.createdTime}
-            modifiedTime={post.modifiedTime}
-            likes={post.likes}
-            isLiked={likedPosts.includes(post.id)}
-            onDelete={handleDelete}
-            onEdit={handleEdit}
-            onSave={handleSave}
-            isEditing={editingPostId === post.id}
-            editedContent={editedContent}
-            setEditedContent={setEditedContent}
-            onLike={handleLikeToggle}
+        <form onSubmit={handleSubmit} style={{ marginBottom: '2rem' }}>
+          <input
+            type="text"
+            name="username"
+            placeholder="Your name"
+            value={newPost.username}
+            onChange={handleChange}
+            style={{ padding: '0.5rem', marginBottom: '0.5rem', width: '100%' }}
           />
-        ))
-      ) : (
-        <p>No posts found.</p>
-      )}
+          <textarea
+            name="content"
+            placeholder="What's on your mind?"
+            value={newPost.content}
+            onChange={handleChange}
+            rows="3"
+            style={{ padding: '0.5rem', marginBottom: '0.5rem', width: '100%' }}
+          />
+          <button type="submit" style={{ padding: '0.5rem 1rem' }}>
+            Post
+          </button>
+        </form>
+
+        {filteredPosts.length > 0 ? (
+          filteredPosts.map((post) => (
+            <Postcard
+              key={post.id}
+              id={post.id}
+              username={post.username}
+              content={post.content}
+              createdTime={post.createdTime}
+              modifiedTime={post.modifiedTime}
+              likes={post.likes}
+              isLiked={likedPosts.includes(post.id)}
+              onDelete={handleDelete}
+              onEdit={handleEdit}
+              onSave={handleSave}
+              isEditing={editingPostId === post.id}
+              editedContent={editedContent}
+              setEditedContent={setEditedContent}
+              onLike={handleLikeToggle}
+            />
+          ))
+        ) : (
+          <p>No posts found.</p>
+        )}
+      </div>
+
+      {/* Right panel (static) */}
+      <div style={{
+        width: '20%',
+        backgroundColor: '#1f1f1f',
+        color: 'white',
+        padding: '1rem',
+        display: 'none', // optional: hide on small screens
+        flexShrink: 0,
+      }}>
+        <h3>👤 Profile</h3>
+        <p>Coming soon...</p>
+      </div>
     </div>
   );
 };
