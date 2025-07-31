@@ -19,26 +19,26 @@
 - 🧭 **Routing with React Router**: Pages for Home, Feed, Login, Profile, NotFound
 
 ---
----
+
 ## 📁 Project Structure
 
-devconnect/
-├── public/
-│ └── index.html
-├── src/
-│ ├── components/
-│ │ ├── Navbar.jsx
-│ │ └── PostCard.jsx
-│ ├── pages/
-│ │ ├── Home.jsx
-│ │ ├── Feed.jsx
-│ │ ├── Login.jsx
-│ │ ├── Profile.jsx
-│ │ └── NotFound.jsx
-│ └── App.js
-├── package.json
-└── README.md
----
+    devconnect/
+    ├── public/
+    │ └── index.html
+    ├── src/
+    │ ├── components/
+    │ │ ├── Navbar.jsx
+    │ │ └── PostCard.jsx
+    │ ├── pages/
+    │ │ ├── Home.jsx
+    │ │ ├── Feed.jsx
+    │ │ ├── Login.jsx
+    │ │ ├── Profile.jsx
+    │ │ └── NotFound.jsx
+    │ └── App.js
+    ├── package.json
+    └── README.md
+
 
 
 
@@ -54,18 +54,24 @@ devconnect/
 ## 🚀 Installation & Run
 
 1. **Install dependencies**
+
         npm install
+
 2   Run the development server
+
         npm start
+
     App will open at: http://localhost:3000
 
 
 👤 Author
+
 GitHub: @uttej-git
 
 
 
 📌 Future Enhancements
+
     🔐 Login authentication (with backend)
 
     🖼️ Profile photo support
