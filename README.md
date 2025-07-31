@@ -1,22 +1,27 @@
-# DevConnect
+# 🚀 DevConnect
 
-DevConnect is a simple React-based practice project that demonstrates basic routing and component-based layout. It includes a navbar and multiple pages like Home, Feed, Profile, and Login.
+**DevConnect** is a React-based full-stack-ready project that mimics a minimal social feed experience. It demonstrates component-based design, client-side routing, post interaction features, and theme toggling.
+
+---
 
 ## 🛠️ Features
 
-- 📝 **Post your thoughts** (with name & content)
-- 🕒 **Timestamps**: Shows when the post was created
-- ✏️ **Edit support**: Modify posts with real-time updates and updated timestamp
-- ❌ **Delete support**: Remove unwanted posts instantly
-- 🤍 **Like/Unlike Toggle**: Users can like or unlike posts; like count is stored
-- 💾 **LocalStorage**: All post data (content, likes, timestamps) is saved across reloads
-- 🌗 **Dark Mode Support**: Themed UI for better night reading
-- ⚡ **Instant UI updates** via `useState` and `useEffect`
-- 🔍 **Search Posts**: Filter visible posts by username or content
-  
+- 📝 **Post Creation**: Add new thoughts with name and content
+- 🕒 **Timestamps**: Automatically shows when a post was created or edited
+- ✏️ **Edit Support**: Modify posts with updated timestamp
+- ❌ **Delete Support**: Remove unwanted posts
+- 🤍 **Like/Unlike Toggle**: Like or unlike a post with instant UI feedback
+- 🔍 **Search Posts**: Filter visible posts by **username or content**
+- 💾 **LocalStorage**: Post data, like counts, and timestamps persist across reloads
+- 🌗 **Dark Mode Toggle**: Switch between dark and light UI themes
+- 📱 **Responsive Layout**: Clean 3-column layout on Feed page (Post input, Feed, Summary)
+- ⚡ **Instant Updates** using `useState` and `useEffect` hooks
+- 🧭 **Routing with React Router**: Pages for Home, Feed, Login, Profile, NotFound
 
-'''
-## 📁 Project Structure\
+---
+---
+## 📁 Project Structure
+
 devconnect/
 ├── public/
 │ └── index.html
@@ -33,31 +38,38 @@ devconnect/
 │ └── App.js
 ├── package.json
 └── README.md
+---
 
-'''
 
+
+---
 
 ## ⚙️ Prerequisites
 
-- Node.js and npm installed
+- [Node.js](https://nodejs.org/) (v14 or above)
+- npm (comes with Node.js)
+
+---
 
 ## 🚀 Installation & Run
 
+1. **Install dependencies**
+        npm install
+2   Run the development server
+        npm start
+    App will open at: http://localhost:3000
 
-
-```bash
-npm install
-npm start
-
-Runs the app in development mode. Open http://localhost:3000 to view it in the browser.
-
-🧠 Upcoming Features
-    
-    🔒 Auth-based post visibility
-
-    🧑 Profile page completion
-
-    📱 Responsive mobile layout and More
 
 👤 Author
-@uttej-git
+GitHub: @uttej-git
+
+
+
+📌 Future Enhancements
+    🔐 Login authentication (with backend)
+
+    🖼️ Profile photo support
+
+    📲 Mobile responsiveness
+
+    🧪 Unit testing with React Testing Library
