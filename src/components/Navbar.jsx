@@ -1,19 +1,28 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { ThemeContext } from '../App';
 
 const Navbar = () => {
   const { darkMode, setDarkMode } = useContext(ThemeContext);
 
-  const linkStyle = {
+  const baseStyle = {
     padding: '0.5rem 1rem',
     borderRadius: '5px',
-    backgroundColor: darkMode ? '#444' : '#ddd',
-    color: darkMode ? 'white' : 'black',
     textDecoration: 'none',
     fontWeight: 'bold',
     fontSize: '0.95rem',
+    transition: 'all 0.3s ease',
   };
+
+  const getLinkStyle = ({ isActive }) => ({
+    ...baseStyle,
+    backgroundColor: isActive
+      ? darkMode ? '#888' : '#ccc'
+      : darkMode ? '#444' : '#ddd',
+    color: isActive
+      ? darkMode ? '#fff' : '#000'
+      : darkMode ? '#eee' : '#333',
+  });
 
   return (
     <nav
@@ -26,23 +35,25 @@ const Navbar = () => {
         color: darkMode ? 'white' : 'black',
       }}
     >
-      {/* Left spacer (empty) */}
+      {/* Left spacer */}
       <div style={{ flex: 1 }}></div>
 
-      {/* Centered nav links */}
+      {/* Center nav links */}
       <div style={{ flex: 2, display: 'flex', justifyContent: 'center', gap: '0.75rem' }}>
-        <Link to="/" style={linkStyle}>Home</Link>
-        <Link to="/feed" style={linkStyle}>Feed</Link>
-        <Link to="/profile" style={linkStyle}>Profile</Link>
-        <Link to="/login" style={linkStyle}>Login</Link>
+        <NavLink to="/" style={getLinkStyle}>Home</NavLink>
+        <NavLink to="/feed" style={getLinkStyle}>Feed</NavLink>
+        <NavLink to="/profile" style={getLinkStyle}>Profile</NavLink>
+        <NavLink to="/login" style={getLinkStyle}>Login</NavLink>
       </div>
 
-      {/* Right-side toggle */}
+      {/* Right theme toggle */}
       <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
         <button
           onClick={() => setDarkMode(!darkMode)}
           style={{
-            ...linkStyle,
+            ...baseStyle,
+            backgroundColor: darkMode ? '#444' : '#ddd',
+            color: darkMode ? 'white' : 'black',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
