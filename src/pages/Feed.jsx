@@ -61,6 +61,7 @@ const Feed = () => {
   const [editingPostId, setEditingPostId] = useState(null);
   const [editedContent, setEditedContent] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
+  const [showPostForm, setShowPostForm] = useState(false); // 🔄 toggle form
 
   useEffect(() => {
     localStorage.setItem('devconnect-posts', JSON.stringify(posts));
@@ -93,6 +94,7 @@ const Feed = () => {
 
     setPosts([newEntry, ...posts]);
     setNewPost({ username: '', content: '' });
+    setShowPostForm(false); // Hide form after post
   };
 
   const handleClear = () => {
@@ -193,32 +195,50 @@ const Feed = () => {
           }}
         />
 
-        <form onSubmit={handleSubmit} style={{ marginBottom: '2rem' }}>
-          <input
-            type="text"
-            name="username"
-            placeholder="Your name"
-            value={newPost.username}
-            onChange={handleChange}
-            style={{ padding: '0.5rem', marginBottom: '0.5rem', width: '100%' }}
-          />
-          <textarea
-            name="content"
-            placeholder="What's on your mind?"
-            value={newPost.content}
-            onChange={handleChange}
-            rows="3"
-            style={{ padding: '0.5rem', marginBottom: '0.5rem', width: '100%' }}
-          />
-          <div style={{ display: 'flex', gap: '1rem' }}>
-            <button type="submit" style={{ padding: '0.5rem 1rem' }}>
-              Post
-            </button>
-            <button type="button" onClick={handleClear} style={{ padding: '0.5rem 1rem' }}>
-              Clear
-            </button>
-          </div>
-        </form>
+        {/* Toggle Post Form */}
+        <button
+          onClick={() => setShowPostForm(!showPostForm)}
+          style={{
+            fontSize: '1.1rem',
+            padding: '0.5rem 1rem',
+            marginBottom: '1rem',
+            backgroundColor: '#eee',
+            border: '1px solid #aaa',
+            borderRadius: '5px',
+            cursor: 'pointer',
+          }}
+        >
+          {showPostForm ? '➖ Hide' : '➕ Add Post'}
+        </button>
+
+        {showPostForm && (
+          <form onSubmit={handleSubmit} style={{ marginBottom: '2rem' }}>
+            <input
+              type="text"
+              name="username"
+              placeholder="Your name"
+              value={newPost.username}
+              onChange={handleChange}
+              style={{ padding: '0.5rem', marginBottom: '0.5rem', width: '100%' }}
+            />
+            <textarea
+              name="content"
+              placeholder="What's on your mind?"
+              value={newPost.content}
+              onChange={handleChange}
+              rows="3"
+              style={{ padding: '0.5rem', marginBottom: '0.5rem', width: '100%' }}
+            />
+            <div style={{ display: 'flex', gap: '1rem' }}>
+              <button type="submit" style={{ padding: '0.5rem 1rem' }}>
+                Post
+              </button>
+              <button type="button" onClick={handleClear} style={{ padding: '0.5rem 1rem' }}>
+                Clear
+              </button>
+            </div>
+          </form>
+        )}
 
         {filteredPosts.length > 0 ? (
           filteredPosts.map((post) => (
