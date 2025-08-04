@@ -18,6 +18,7 @@
 - ⚡ **Instant Updates** using `useState` and `useEffect` hooks
 - 🧭 **Routing with React Router**: Pages for Home, Feed, Login, Profile, NotFound
 - 🧹 **Clear Input Button**: Reset the username and caption fields instantly with one click
+- ➕ **Added toggle button** : to show/hide post form for cleaner UI
 
 ---
 
