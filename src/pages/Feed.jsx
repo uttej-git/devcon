@@ -196,20 +196,44 @@ const Feed = () => {
         />
 
         {/* Toggle Post Form */}
-        <button
-          onClick={() => setShowPostForm(!showPostForm)}
-          style={{
-            fontSize: '1.1rem',
-            padding: '0.5rem 1rem',
-            marginBottom: '1rem',
-            backgroundColor: '#eee',
-            border: '1px solid #aaa',
-            borderRadius: '5px',
-            cursor: 'pointer',
-          }}
-        >
-          {showPostForm ? '➖ Hide' : '➕ Add Post'}
-        </button>
+        <div
+  style={{
+    display: 'flex',
+    alignItems: 'center',
+    marginBottom: '1.5rem',
+    border: '1px solid #ccc',
+    borderRadius: '6px',
+    overflow: 'hidden',
+    backgroundColor: '#f9f9f9',
+  }}
+>
+  <button
+    onClick={() => setShowPostForm(!showPostForm)}
+    style={{
+      fontSize: '1rem',
+      padding: '0.6rem 1.2rem',
+      backgroundColor: '#fff',
+      border: 'none',
+      borderRight: '1px solid #ccc',
+      cursor: 'pointer',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '0.5rem',
+    }}
+  >
+    ➕ Add Post
+  </button>
+
+  <div style={{
+    flex: 1,
+    padding: '0.6rem 1rem',
+    color: '#999',
+    fontStyle: 'italic',
+  }}>
+    Create a new post and share your thoughts!
+  </div>
+</div>
+
 
         {showPostForm && (
           <form onSubmit={handleSubmit} style={{ marginBottom: '2rem' }}>
