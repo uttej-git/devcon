@@ -95,6 +95,10 @@ const Feed = () => {
     setNewPost({ username: '', content: '' });
   };
 
+  const handleClear = () => {
+    setNewPost({ username: '', content: '' });
+  };
+
   const handleDelete = (id) => {
     const confirmDelete = window.confirm("Are you sure you want to delete this post?");
     if (!confirmDelete) return;
@@ -156,7 +160,7 @@ const Feed = () => {
         backgroundColor: '#1f1f1f',
         color: 'white',
         padding: '1rem',
-        display: 'none', // optional: hide on small screens
+        display: 'none',
         flexShrink: 0,
       }}>
         <h3>🔔 Notifications</h3>
@@ -206,9 +210,14 @@ const Feed = () => {
             rows="3"
             style={{ padding: '0.5rem', marginBottom: '0.5rem', width: '100%' }}
           />
-          <button type="submit" style={{ padding: '0.5rem 1rem' }}>
-            Post
-          </button>
+          <div style={{ display: 'flex', gap: '1rem' }}>
+            <button type="submit" style={{ padding: '0.5rem 1rem' }}>
+              Post
+            </button>
+            <button type="button" onClick={handleClear} style={{ padding: '0.5rem 1rem' }}>
+              Clear
+            </button>
+          </div>
         </form>
 
         {filteredPosts.length > 0 ? (
@@ -242,7 +251,7 @@ const Feed = () => {
         backgroundColor: '#1f1f1f',
         color: 'white',
         padding: '1rem',
-        display: 'none', // optional: hide on small screens
+        display: 'none',
         flexShrink: 0,
       }}>
         <h3>👤 Profile</h3>
