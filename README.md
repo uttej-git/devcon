@@ -17,6 +17,7 @@
 - 📱 **Responsive Layout**: Clean 3-column layout on Feed page (Post input, Feed, Summary)
 - ⚡ **Instant Updates** using `useState` and `useEffect` hooks
 - 🧭 **Routing with React Router**: Pages for Home, Feed, Login, Profile, NotFound
+- 🧹 **Clear Input Button**: Reset the username and caption fields instantly with one click
 
 ---
 
