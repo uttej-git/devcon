@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { ThemeContext } from '../App';
 import Postcard from '../components/Postcard';
 
 const Feed = () => {
+  const { darkMode } = useContext(ThemeContext);
+
   const [posts, setPosts] = useState(() => {
     const savedPosts = localStorage.getItem('devconnect-posts');
     let loadedPosts = [];
@@ -61,7 +64,7 @@ const Feed = () => {
   const [editingPostId, setEditingPostId] = useState(null);
   const [editedContent, setEditedContent] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
-  const [showPostForm, setShowPostForm] = useState(false); // 🔄 toggle form
+  const [showPostForm, setShowPostForm] = useState(false);
 
   useEffect(() => {
     localStorage.setItem('devconnect-posts', JSON.stringify(posts));
@@ -94,12 +97,10 @@ const Feed = () => {
 
     setPosts([newEntry, ...posts]);
     setNewPost({ username: '', content: '' });
-    setShowPostForm(false); // Hide form after post
+    setShowPostForm(false);
   };
 
-  const handleClear = () => {
-    setNewPost({ username: '', content: '' });
-  };
+  const handleClear = () => setNewPost({ username: '', content: '' });
 
   const handleDelete = (id) => {
     const confirmDelete = window.confirm("Are you sure you want to delete this post?");
@@ -156,84 +157,63 @@ const Feed = () => {
   return (
     <div style={{ display: 'flex', height: 'calc(100vh - 64px)' }}>
       
-      {/* Left panel (static) */}
-      <div style={{
-        width: '20%',
-        backgroundColor: '#1f1f1f',
-        color: 'white',
-        padding: '1rem',
-        display: 'none',
-        flexShrink: 0,
-      }}>
-        <h3>🔔 Notifications</h3>
-        <p>Coming soon...</p>
-      </div>
+      {/* Left panel - Empty */}
+      <div style={{ width: '20%', backgroundColor: darkMode ? '#121212' : '#f5f5f5' }}></div>
 
-      {/* Center scrollable feed */}
+      {/* Center Feed */}
       <div
         style={{
           flex: 1,
           overflowY: 'auto',
           padding: '1rem',
-          maxWidth: '600px',
+          maxWidth: '720px',
           margin: '0 auto',
+          backgroundColor: darkMode ? '#1f1f1f' : '#fff',
+          color: darkMode ? 'white' : 'black',
         }}
       >
         <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Developer Feed</h2>
 
-        <input
-          type="text"
-          placeholder="🔍 Search by name or content"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          style={{
-            padding: '0.5rem',
-            marginBottom: '1rem',
-            width: '100%',
-            border: '1px solid #ccc',
-            borderRadius: '4px',
-          }}
-        />
-
-        {/* Toggle Post Form */}
+        {/* Add Post Box */}
         <div
-  style={{
-    display: 'flex',
-    alignItems: 'center',
-    marginBottom: '1.5rem',
-    border: '1px solid #ccc',
-    borderRadius: '6px',
-    overflow: 'hidden',
-    backgroundColor: '#f9f9f9',
-  }}
->
-  <button
-    onClick={() => setShowPostForm(!showPostForm)}
-    style={{
-      fontSize: '1rem',
-      padding: '0.6rem 1.2rem',
-      backgroundColor: '#fff',
-      border: 'none',
-      borderRight: '1px solid #ccc',
-      cursor: 'pointer',
-      display: 'flex',
-      alignItems: 'center',
-      gap: '0.5rem',
-    }}
-  >
-    ➕ Add Post
-  </button>
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            marginBottom: '1.5rem',
+            border: `1px solid ${darkMode ? '#333' : '#ccc'}`,
+            borderRadius: '6px',
+            overflow: 'hidden',
+            backgroundColor: darkMode ? '#2b2b2b' : '#fff',
+          }}
+        >
+          <button
+            onClick={() => setShowPostForm(!showPostForm)}
+            style={{
+              fontSize: '1rem',
+              padding: '0.6rem 1.2rem',
+              backgroundColor: 'transparent',
+              border: 'none',
+              borderRight: `1px solid ${darkMode ? '#333' : '#ccc'}`,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              color: 'purple',
+              fontWeight: 'bold',
+            }}
+          >
+            ➕ Add Post
+          </button>
 
-  <div style={{
-    flex: 1,
-    padding: '0.6rem 1rem',
-    color: '#999',
-    fontStyle: 'italic',
-  }}>
-    Create a new post and share your thoughts!
-  </div>
-</div>
-
+          <div style={{
+            flex: 1,
+            padding: '0.6rem 1rem',
+            color: darkMode ? '#bbb' : '#999',
+            fontStyle: 'italic',
+          }}>
+            Create a new post and share your thoughts!
+          </div>
+        </div>
 
         {showPostForm && (
           <form onSubmit={handleSubmit} style={{ marginBottom: '2rem' }}>
@@ -243,7 +223,14 @@ const Feed = () => {
               placeholder="Your name"
               value={newPost.username}
               onChange={handleChange}
-              style={{ padding: '0.5rem', marginBottom: '0.5rem', width: '100%' }}
+              style={{
+                padding: '0.5rem',
+                marginBottom: '0.5rem',
+                width: '100%',
+                backgroundColor: darkMode ? '#333' : '#fff',
+                color: darkMode ? 'white' : 'black',
+                border: `1px solid ${darkMode ? '#444' : '#ccc'}`,
+              }}
             />
             <textarea
               name="content"
@@ -251,7 +238,14 @@ const Feed = () => {
               value={newPost.content}
               onChange={handleChange}
               rows="3"
-              style={{ padding: '0.5rem', marginBottom: '0.5rem', width: '100%' }}
+              style={{
+                padding: '0.5rem',
+                marginBottom: '0.5rem',
+                width: '100%',
+                backgroundColor: darkMode ? '#333' : '#fff',
+                color: darkMode ? 'white' : 'black',
+                border: `1px solid ${darkMode ? '#444' : '#ccc'}`,
+              }}
             />
             <div style={{ display: 'flex', gap: '1rem' }}>
               <button type="submit" style={{ padding: '0.5rem 1rem' }}>
@@ -263,6 +257,22 @@ const Feed = () => {
             </div>
           </form>
         )}
+
+        <input
+          type="text"
+          placeholder="🔍 Search by name or content"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          style={{
+            padding: '0.5rem',
+            marginBottom: '1rem',
+            width: '100%',
+            backgroundColor: darkMode ? '#2d2d2d' : '#fff',
+            color: darkMode ? 'white' : 'black',
+            border: `1px solid ${darkMode ? '#444' : '#ccc'}`,
+            borderRadius: '4px',
+          }}
+        />
 
         {filteredPosts.length > 0 ? (
           filteredPosts.map((post) => (
@@ -289,16 +299,16 @@ const Feed = () => {
         )}
       </div>
 
-      {/* Right panel (static) */}
-      <div style={{
-        width: '20%',
-        backgroundColor: '#1f1f1f',
-        color: 'white',
-        padding: '1rem',
-        display: 'none',
-        flexShrink: 0,
-      }}>
-        <h3>👤 Profile</h3>
+      {/* Right panel - Profile Summary */}
+      <div
+        style={{
+          width: '20%',
+          backgroundColor: darkMode ? '#121212' : '#f5f5f5',
+          color: darkMode ? 'white' : 'black',
+          padding: '1rem',
+        }}
+      >
+        <h3 style={{ color: 'purple' }}>👤 <strong>Profile Summary</strong></h3>
         <p>Coming soon...</p>
       </div>
     </div>
