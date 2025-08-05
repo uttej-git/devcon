@@ -20,57 +20,65 @@ const Postcard = ({
   const { darkMode } = useContext(ThemeContext);
 
   const cardStyle = {
-    backgroundColor: darkMode ? '#2b2b2b' : '#ffffff',
+    backgroundColor: darkMode ? '#2c2c2c' : '#ffffff',
     color: darkMode ? '#f0f0f0' : '#000000',
     padding: '1rem',
-    marginBottom: '1rem',
-    borderRadius: '8px',
+    marginBottom: '1.5rem',
+    borderRadius: '12px',
     boxShadow: darkMode
-      ? '0 2px 6px rgba(255,255,255,0.05)'
-      : '0 2px 4px rgba(0,0,0,0.1)',
-  };
-
-  const textAreaStyle = {
-    width: '100%',
-    marginBottom: '0.5rem',
-    backgroundColor: darkMode ? '#1e1e1e' : '#f9f9f9',
-    color: darkMode ? '#f0f0f0' : '#000',
-    border: '1px solid #ccc',
-    borderRadius: '4px',
-    padding: '0.5rem',
-  };
-
-  const smallTextStyle = {
-    color: darkMode ? '#cccccc' : 'gray',
-    display: 'block',
-    fontSize: '0.85rem',
+      ? '0 2px 10px rgba(255, 255, 255, 0.05)'
+      : '0 2px 8px rgba(0, 0, 0, 0.08)',
+    transition: 'all 0.3s ease',
   };
 
   const buttonStyle = {
-    marginRight: '0.5rem',
-    padding: '0.3rem 0.6rem',
+    padding: '0.4rem 0.8rem',
+    fontSize: '0.9rem',
+    fontWeight: 'bold',
     border: 'none',
-    borderRadius: '4px',
+    borderRadius: '6px',
     cursor: 'pointer',
-    backgroundColor: darkMode ? '#444' : '#ddd',
-    color: darkMode ? '#f0f0f0' : '#000',
-  };
-
-  const deleteButtonStyle = {
-    ...buttonStyle,
-    backgroundColor: '#f44336',
-    color: '#fff',
+    marginRight: '0.5rem',
+    transition: 'background-color 0.2s',
   };
 
   const likeButtonStyle = {
     ...buttonStyle,
-    backgroundColor: isLiked ? '#0d6efd' : buttonStyle.backgroundColor,
-    color: isLiked ? '#fff' : buttonStyle.color,
+    backgroundColor: isLiked ? '#e74c3c' : '#ecf0f1',
+    color: isLiked ? '#fff' : '#333',
+  };
+
+  const editButtonStyle = {
+    ...buttonStyle,
+    backgroundColor: '#3498db',
+    color: '#fff',
+  };
+
+  const deleteButtonStyle = {
+    ...buttonStyle,
+    backgroundColor: '#e74c3c',
+    color: '#fff',
+  };
+
+  const inputStyle = {
+    width: '100%',
+    padding: '0.5rem',
+    marginBottom: '0.5rem',
+    borderRadius: '6px',
+    border: '1px solid #ccc',
+    backgroundColor: darkMode ? '#1f1f1f' : '#f9f9f9',
+    color: darkMode ? '#f0f0f0' : '#000',
+    resize: 'vertical',
+  };
+
+  const smallText = {
+    fontSize: '0.8rem',
+    color: darkMode ? '#aaa' : '#666',
   };
 
   return (
     <div style={cardStyle}>
-      <h3 style={{ fontWeight: 'bold' }}>{username}</h3>
+      <h3 style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>{username}</h3>
 
       {isEditing ? (
         <>
@@ -78,31 +86,36 @@ const Postcard = ({
             value={editedContent}
             onChange={(e) => setEditedContent(e.target.value)}
             rows="3"
-            style={textAreaStyle}
+            style={inputStyle}
           />
-          <button onClick={() => onSave(id)} style={buttonStyle}>
-            Save
+          <button onClick={() => onSave(id)} style={editButtonStyle}>
+            💾 Save
           </button>
         </>
       ) : (
-        <p>{content}</p>
+        <p style={{ marginBottom: '0.5rem' }}>{content}</p>
       )}
 
-      <small style={smallTextStyle}>Created: {createdTime || 'N/A'}</small>
-      {modifiedTime && modifiedTime !== createdTime && (
-        <small style={smallTextStyle}>Edited: {modifiedTime}</small>
-      )}
+      <div style={{ marginBottom: '0.5rem' }}>
+        <span style={smallText}>🕒 Created: {createdTime}</span>
+        {modifiedTime && modifiedTime !== createdTime && (
+          <>
+            <br />
+            <span style={smallText}>✏️ Edited: {modifiedTime}</span>
+          </>
+        )}
+      </div>
 
       {!isEditing && (
-        <div style={{ marginTop: '0.5rem' }}>
+        <div>
           <button onClick={() => onLike(id)} style={likeButtonStyle}>
-            {isLiked ? '❤️ Liked' : '🤍 Like'} ({likes})
+            {isLiked ? '💙 Liked' : '🤍 Like'} ({likes})
           </button>
-          <button onClick={() => onEdit(id, content)} style={buttonStyle}>
-            Edit
+          <button onClick={() => onEdit(id, content)} style={editButtonStyle}>
+            ✏️ Edit
           </button>
           <button onClick={() => onDelete(id)} style={deleteButtonStyle}>
-            Delete
+            🗑️ Delete
           </button>
         </div>
       )}
