@@ -20,6 +20,7 @@
 - 🧹 **Clear Input Button**: Reset the username and caption fields instantly with one click
 - ➕ **Added toggle button** : to show/hide post form for cleaner UI
 - 🔗 **Navbar Active State**: The current page in the navigation is highlighted for better user experience.
+- 🧾 **Profile Summary Sidebar**: Profile Summary Sidebar on Feed Page
 
 
 ---
