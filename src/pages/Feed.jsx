@@ -65,6 +65,12 @@ const Feed = () => {
   const [editedContent, setEditedContent] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [showPostForm, setShowPostForm] = useState(false);
+  const [profileStats, setProfileStats] = useState({
+    user: 'Guest',
+    postCount: 0,
+    totalLikes: 0,
+    recentPost: 'No recent post',
+  });
 
   useEffect(() => {
     localStorage.setItem('devconnect-posts', JSON.stringify(posts));
@@ -73,6 +79,19 @@ const Feed = () => {
   useEffect(() => {
     localStorage.setItem('devconnect-likedPosts', JSON.stringify(likedPosts));
   }, [likedPosts]);
+
+  useEffect(() => {
+    const user = posts.length > 0 ? posts[0].username : 'Guest';
+    const userPosts = posts.filter((post) => post.username === user);
+    const totalLikes = userPosts.reduce((sum, post) => sum + post.likes, 0);
+
+    setProfileStats({
+      user,
+      postCount: userPosts.length,
+      totalLikes,
+      recentPost: userPosts[0]?.content || 'No recent post',
+    });
+  }, [posts]);
 
   const handleChange = (e) => {
     setNewPost({ ...newPost, [e.target.name]: e.target.value });
@@ -157,10 +176,10 @@ const Feed = () => {
   return (
     <div style={{ display: 'flex', height: 'calc(100vh - 64px)' }}>
       
-      {/* Left panel - Empty */}
+      {/* Left - Empty for now */}
       <div style={{ width: '20%', backgroundColor: darkMode ? '#121212' : '#f5f5f5' }}></div>
 
-      {/* Center Feed */}
+      {/* Center - Feed */}
       <div
         style={{
           flex: 1,
@@ -174,7 +193,7 @@ const Feed = () => {
       >
         <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Developer Feed</h2>
 
-        {/* Add Post Box */}
+        {/* Add Post Button */}
         <div
           style={{
             display: 'flex',
@@ -215,6 +234,7 @@ const Feed = () => {
           </div>
         </div>
 
+        {/* Post Form */}
         {showPostForm && (
           <form onSubmit={handleSubmit} style={{ marginBottom: '2rem' }}>
             <input
@@ -258,6 +278,7 @@ const Feed = () => {
           </form>
         )}
 
+        {/* Search */}
         <input
           type="text"
           placeholder="🔍 Search by name or content"
@@ -274,6 +295,7 @@ const Feed = () => {
           }}
         />
 
+        {/* Posts */}
         {filteredPosts.length > 0 ? (
           filteredPosts.map((post) => (
             <Postcard
@@ -299,7 +321,7 @@ const Feed = () => {
         )}
       </div>
 
-      {/* Right panel - Profile Summary */}
+      {/* Right - Profile Summary */}
       <div
         style={{
           width: '20%',
@@ -309,7 +331,10 @@ const Feed = () => {
         }}
       >
         <h3 style={{ color: 'purple' }}>👤 <strong>Profile Summary</strong></h3>
-        <p>Coming soon...</p>
+        <p><strong>Name:</strong> {profileStats.user}</p>
+        <p><strong>Total Posts:</strong> {profileStats.postCount}</p>
+        <p><strong>Total Likes:</strong> {profileStats.totalLikes}</p>
+        <p><strong>Recent Post:</strong><br />{profileStats.recentPost}</p>
       </div>
     </div>
   );
