@@ -4,24 +4,25 @@
 
 ---
 
-## 🛠️ Features
+## ✨ Features
 
-- 📝 **Post Creation**: Add new thoughts with name and content
-- 🕒 **Timestamps**: Automatically shows when a post was created or edited
-- ✏️ **Edit Support**: Modify posts with updated timestamp
-- ❌ **Delete Support**: Remove unwanted posts
-- 🤍 **Like/Unlike Toggle**: Like or unlike a post with instant UI feedback
-- 🔍 **Search Posts**: Filter visible posts by **username or content**
-- 💾 **LocalStorage**: Post data, like counts, and timestamps persist across reloads
-- 🌗 **Dark Mode Toggle**: Switch between dark and light UI themes
-- 📱 **Responsive Layout**: Clean 3-column layout on Feed page (Post input, Feed, Summary)
-- ⚡ **Instant Updates** using `useState` and `useEffect` hooks
-- 🧭 **Routing with React Router**: Pages for Home, Feed, Login, Profile, NotFound
-- 🧹 **Clear Input Button**: Reset the username and caption fields instantly with one click
-- ➕ **Added toggle button** : to show/hide post form for cleaner UI
-- 🔗 **Navbar Active State**: The current page in the navigation is highlighted for better user experience.
-- 🧾 **Profile Summary NavBar**: Profile Summary Navbar
-- 🧾 **Profile Summary Sidebar**: Profile Summary Sidebar on Feed Page
+- **📝 Post Creation**: Add new thoughts with username and content
+- **🕒 Timestamps**: Auto-generated on post creation and edit
+- **✏️ Edit Support**: Edit post content with updated timestamp
+- **🗑️ Delete Support**: Remove unwanted posts easily
+- **❤️ Like/Unlike Toggle**: Like/unlike a post with instant UI feedback
+- **🔍 Search Posts**: Filter posts by **username** or **content**
+- **💾 LocalStorage**: Persist post data, likes, and timestamps across reloads
+- **🌓 Dark Mode Toggle**: Switch between light and dark themes
+- **📱 Responsive Layout**: Clean 3-column layout (Post input, Feed, Summary)
+- **⚡ Instant Updates**: Powered by `useState` and `useEffect` hooks
+- **🌐 Routing with React Router**: Pages for Home, Feed, Login, Profile, NotFound
+- **🧹 Clear Input Button**: Quickly reset username and content fields
+- **➕ Toggle Add Post Button**: Show/hide post form for clean UI
+- **📍 Navbar Active State**: Current page in navbar is visually highlighted
+- **👤 Profile Summary (Navbar)**: Summary details visible via Navbar
+- **📊 Profile Summary (Sidebar)**: Sidebar on Feed page showing user stats
+
 
 
 ---
