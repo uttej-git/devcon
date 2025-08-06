@@ -77,15 +77,3 @@
 👤 Author
 
 GitHub: @uttej-git
-
-
-
-📌 Future Enhancements
-
-    🔐 Login authentication (with backend)
-
-    🖼️ Profile photo support
-
-    📲 Mobile responsiveness
-
-    🧪 Unit testing with React Testing Library
