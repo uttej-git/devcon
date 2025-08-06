@@ -1,6 +1,7 @@
 # 🚀 DevConnect
 
-**DevConnect** is a React-based full-stack-ready project that mimics a minimal social feed experience. It demonstrates component-based design, client-side routing, post interaction features, and theme toggling.
+**DevConnect** is a full-stack social feed platform designed for developers to post, engage, and stay connected. It replicates key features of platforms like LinkedIn and Twitter but is tailored for developer-centric interactions.
+
 
 ---
 
