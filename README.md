@@ -40,6 +40,7 @@
     │ ├── pages/
     │ │ ├── Home.jsx
     │ │ ├── Feed.jsx
+    │ │ ├── FeedGlow.css
     │ │ ├── Login.jsx
     │ │ ├── Profile.jsx
     │ │ └── NotFound.jsx
