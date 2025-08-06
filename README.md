@@ -22,6 +22,7 @@
 - **📍 Navbar Active State**: Current page in navbar is visually highlighted
 - **👤 Profile Summary (Navbar)**: Summary details visible via Navbar
 - **📊 Profile Summary (Sidebar)**: Sidebar on Feed page showing user stats
+- **✨ Feed Title Glow**: CSS animation (`FeedGlow.css`) adds neon glow effect to title
 
 
 
