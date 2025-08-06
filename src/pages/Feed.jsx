@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { ThemeContext } from '../App';
 import Postcard from '../components/Postcard';
+import './FeedGlow.css';
 
 const Feed = () => {
   const { darkMode } = useContext(ThemeContext);
@@ -17,8 +18,7 @@ const Feed = () => {
       }
     }
 
-    const now = () =>
-      new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+    const now = () => new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
 
     const defaultPosts = [
       {
@@ -124,9 +124,7 @@ const Feed = () => {
   const handleDelete = (id) => {
     const confirmDelete = window.confirm("Are you sure you want to delete this post?");
     if (!confirmDelete) return;
-
-    const updatedPosts = posts.filter((post) => post.id !== id);
-    setPosts(updatedPosts);
+    setPosts(posts.filter((post) => post.id !== id));
     setLikedPosts(likedPosts.filter((postId) => postId !== id));
   };
 
@@ -141,9 +139,7 @@ const Feed = () => {
     });
 
     const updatedPosts = posts.map((post) =>
-      post.id === id
-        ? { ...post, content: editedContent, modifiedTime: timestamp }
-        : post
+      post.id === id ? { ...post, content: editedContent, modifiedTime: timestamp } : post
     );
     setPosts(updatedPosts);
     setEditingPostId(null);
@@ -152,19 +148,12 @@ const Feed = () => {
 
   const handleLikeToggle = (id) => {
     const isAlreadyLiked = likedPosts.includes(id);
-
-    const updatedPosts = posts.map((post) =>
-      post.id === id
-        ? { ...post, likes: post.likes + (isAlreadyLiked ? -1 : 1) }
-        : post
+    setPosts(posts.map((post) =>
+      post.id === id ? { ...post, likes: post.likes + (isAlreadyLiked ? -1 : 1) } : post
+    ));
+    setLikedPosts(
+      isAlreadyLiked ? likedPosts.filter((postId) => postId !== id) : [...likedPosts, id]
     );
-    setPosts(updatedPosts);
-
-    if (isAlreadyLiked) {
-      setLikedPosts(likedPosts.filter((postId) => postId !== id));
-    } else {
-      setLikedPosts([...likedPosts, id]);
-    }
   };
 
   const filteredPosts = posts.filter(
@@ -175,8 +164,7 @@ const Feed = () => {
 
   return (
     <div style={{ display: 'flex', height: 'calc(100vh - 64px)' }}>
-      
-      {/* Left - Empty for now */}
+      {/* Left Side (optional) */}
       <div style={{ width: '20%', backgroundColor: darkMode ? '#121212' : '#f5f5f5' }}></div>
 
       {/* Center - Feed */}
@@ -191,7 +179,18 @@ const Feed = () => {
           color: darkMode ? 'white' : 'black',
         }}
       >
-        <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Developer Feed</h2>
+        <h1
+          className="glow-text"
+          style={{
+            fontSize: '3rem',
+            fontWeight: 'bold',
+            textAlign: 'center',
+            marginBottom: '2rem',
+            fontFamily: 'Orbitron, monospace',
+          }}
+        >
+          💡 Developer Feed
+        </h1>
 
         {/* Add Post Button */}
         <div
@@ -223,7 +222,6 @@ const Feed = () => {
           >
             ➕ Add Post
           </button>
-
           <div style={{
             flex: 1,
             padding: '0.6rem 1rem',
