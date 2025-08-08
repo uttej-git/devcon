@@ -13,15 +13,22 @@ export const ThemeContext = createContext();
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
 
   return (
     <ThemeContext.Provider value={{ darkMode, setDarkMode }}>
       <div className={darkMode ? 'app dark' : 'app light'}>
         <Router>
-          <Navbar />
+          <Navbar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/feed" element={<Feed />} />
+            <Route
+              path="/"
+              element={<Home />}
+            />
+            <Route
+              path="/feed"
+              element={<Feed searchTerm={searchTerm} />}
+            />
             <Route path="/profile" element={<Profile />} />
             <Route path="/login" element={<Login />} />
             <Route path="*" element={<NotFound />} />
