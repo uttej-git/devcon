@@ -27,6 +27,7 @@
 - **Navbar**: Redesigned navigation bar with dark/light theme support and page highlights.
 - **Global search state management**- Global Search Term via App State
 -**🔎 Search To Nav**- Moved Search Bar to Navbar
+-**🧹 Feed Cleanup for Navbar Search Integration**-Updated the Feed page to remove its local search bar and instead rely on the global `searchTerm` passed down from `App.js`. This makes the Feed a pure consumer of global search input, improving code simplicity and separation of concerns.
 
 
 
