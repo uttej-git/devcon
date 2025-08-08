@@ -276,22 +276,7 @@ const Feed = () => {
           </form>
         )}
 
-        {/* Search */}
-        <input
-          type="text"
-          placeholder="🔍 Search by name or content"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          style={{
-            padding: '0.5rem',
-            marginBottom: '1rem',
-            width: '100%',
-            backgroundColor: darkMode ? '#2d2d2d' : '#fff',
-            color: darkMode ? 'white' : 'black',
-            border: `1px solid ${darkMode ? '#444' : '#ccc'}`,
-            borderRadius: '4px',
-          }}
-        />
+        
 
         {/* Posts */}
         {filteredPosts.length > 0 ? (
