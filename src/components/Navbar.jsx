@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ThemeContext } from '../App';
 
-const Navbar = () => {
+const Navbar = ({ searchTerm, setSearchTerm }) => {
   const { darkMode, setDarkMode } = useContext(ThemeContext);
 
   const navStyle = {
@@ -49,10 +49,27 @@ const Navbar = () => {
 
   return (
     <nav style={navStyle}>
-      {/* Logo/Title */}
+      {/* Logo */}
       <NavLink to="/" style={logoStyle}>
         💡 DevConnect
       </NavLink>
+
+      {/* Search bar */}
+      <input
+        type="text"
+        placeholder="🔍 Search posts"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        style={{
+          padding: '0.4rem 0.75rem',
+          borderRadius: '4px',
+          border: '1px solid',
+          borderColor: darkMode ? '#444' : '#ccc',
+          backgroundColor: darkMode ? '#2d2d2d' : '#fff',
+          color: darkMode ? '#fff' : '#000',
+          width: '240px',
+        }}
+      />
 
       {/* Navigation Links */}
       <div style={linksContainer}>
