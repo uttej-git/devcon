@@ -25,6 +25,7 @@
 - **📊 Profile Summary (Sidebar)**: Sidebar on Feed page showing user stats
 - **✨ Feed Title Glow**: CSS animation (`FeedGlow.css`) adds neon glow effect to title
 - **Navbar**: Redesigned navigation bar with dark/light theme support and page highlights.
+-**🔍Search Bar**- Global Search Term via App State
 
 
 
